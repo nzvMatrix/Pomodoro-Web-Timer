@@ -1,7 +1,6 @@
-# Pomodoro Web Timer
- Pomodoro TImer Website!
-
 # Pomodoro Timer Website
+ 
+ Pomodoro TImer Website!
 
 A responsive and visually appealing Pomodoro timer web application built using HTML, CSS, and JavaScript. The application helps you manage your work and break sessions effectively using the Pomodoro Technique.
 
