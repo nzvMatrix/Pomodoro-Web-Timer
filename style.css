@@ -14,7 +14,7 @@
 
 .container {
   margin: 0;
-  padding-top: 10vh;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -112,4 +112,25 @@ a:hover {
   #timer {
     color: #f6f6f6;
   }
+}
+
+.session-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Style for timer container with +/- 5 min buttons */
+.timer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+/* Style for control buttons container */
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }

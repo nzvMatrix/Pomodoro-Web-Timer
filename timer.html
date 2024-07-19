@@ -9,14 +9,20 @@
 <body>
     <div class="container">
         <h1>Pomodoro Timer</h1>
-        <button id="start-25-5">Start 25/5</button>
-        <button id="start-50-10">Start 50/10</button>
-        <button id="start">Start</button>
-        <button id="stop">Stop</button>
-        <button id="reset">Reset</button>
-        <button id="add-5-min">Add 5 min</button>
-        <button id="minus-5-min">Minus 5 min</button>
-        <div id="timer">00:00</div>
+        <div class="session-buttons">
+            <button id="start-25-5">Start 25/5</button>
+            <button id="start-50-10">Start 50/10</button>
+        </div>
+        <div class="timer-container">
+            <button id="minus-5-min">-5 min</button>
+            <div id="timer">00:00</div>
+            <button id="add-5-min">+5 min</button>
+        </div>
+        <div class="control-buttons">
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <button id="reset">Reset</button>
+        </div>
     </div>
 
     <script>
