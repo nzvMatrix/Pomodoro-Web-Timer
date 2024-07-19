@@ -11,49 +11,79 @@
         <h1>Pomodoro Timer</h1>
         <button id="start-25-5">Start 25/5</button>
         <button id="start-50-10">Start 50/10</button>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+        <button id="add-5-min">Add 5 min</button>
+        <button id="minus-5-min">Minus 5 min</button>
         <div id="timer">00:00</div>
     </div>
 
     <script>
         let timer;
         let studyTime;
-        let breakTime;
+        let isBreak = false;
+        let remainingTime;
 
         document.getElementById('start-25-5').addEventListener('click', function() {
             studyTime = 25 * 60;
             breakTime = 5 * 60;
-            startTimer(studyTime, breakTime);
+            remainingTime = studyTime;
+            updateTimerDisplay(remainingTime);
         });
 
         document.getElementById('start-50-10').addEventListener('click', function() {
             studyTime = 50 * 60;
             breakTime = 10 * 60;
-            startTimer(studyTime, breakTime);
+            remainingTime = studyTime;
+            updateTimerDisplay(remainingTime);
         });
 
-        function startTimer(studyTime, breakTime) {
-            let time = studyTime;
-            timer = setInterval(function() {
-                let minutes = Math.floor(time / 60);
-                let seconds = time % 60;
-                document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                time--;
+        document.getElementById('start').addEventListener('click', function() {
+            startTimer(remainingTime, isBreak ? breakTime : studyTime);
+        });
 
-                if (time < 0) {
+        document.getElementById('stop').addEventListener('click', function() {
+            clearInterval(timer);
+        });
+
+        document.getElementById('reset').addEventListener('click', function() {
+            clearInterval(timer);
+            remainingTime = isBreak ? breakTime : studyTime;
+            updateTimerDisplay(remainingTime);
+        });
+
+        document.getElementById('add-5-min').addEventListener('click', function() {
+            remainingTime += 5 * 60;
+            updateTimerDisplay(remainingTime);
+        });
+
+        document.getElementById('minus-5-min').addEventListener('click', function() {
+            remainingTime = Math.max(0, remainingTime - 5 * 60);
+            updateTimerDisplay(remainingTime);
+        });
+
+        function startTimer(duration, resetTime) {
+            remainingTime = duration;
+            timer = setInterval(function() {
+                updateTimerDisplay(remainingTime);
+                remainingTime--;
+
+                if (remainingTime < 0) {
                     clearInterval(timer);
-                    time = breakTime;
-                    timer = setInterval(function() {
-                        let minutes = Math.floor(time / 60);
-                        let seconds = time % 60;
-                        document.getElementById('timer').textContent = `Break: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                        time--;
-                        if (time < 0) {
-                            clearInterval(timer);
+                    isBreak = !isBreak;
+                    remainingTime = isBreak ? breakTime : studyTime;
+                    startTimer(remainingTime, resetTime);
                         }
                     }, 1000);
                 }
-            }, 1000);
+
+                function updateTimerDisplay(time) {
+            let minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            document.getElementById('timer').textContent = `${isBreak ? 'Break: ' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }
+
     </script>
 </body>
 </html>
